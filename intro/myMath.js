@@ -31,9 +31,16 @@ module.exports = {
         var greater = Math.max(num1, num2, num3);  
     },
 
-    isEven: function(num) {
+    oddvseven: function oddOrEven(x) {
+        return ( x & 1 ) ? "odd" : "even";
+      },
+    oddvsevenPrint: function checkNumber(argNumber) {
+        document.getElementById("result").innerHTML = "Number " + argNumber + " is " + oddOrEven(argNumber);
+      }
+
+    //isEven: function(num1, num2, num3) {
         //return true if num is even
         //otherwsie, return false
         // mod (modulus) operator  %  i.e. 11 % 2 = 1 because remainder 1
-    }
+    //}
 };
