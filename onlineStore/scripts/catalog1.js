@@ -3,7 +3,7 @@ var categories = [];
 
 function fetchData() {
     $.ajax({
-        url: 'http://localhost:8080/api/items',
+        url: 'http://restclass.azurewebsites.net/api/points',
         type: 'GET',
         success: function (allItems) {
             // travel allItems

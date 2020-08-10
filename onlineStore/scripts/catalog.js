@@ -4,15 +4,16 @@ var categories = [];
 
 function fetchData(){
     $.ajax({
-        url: "http://localhost:8080/api/items",
+        url: "http://localhost:8080/api/items/Kenny",
         type: "GET", 
         success: function(allItems) {
             // travel allItems
-            // check if item belongs to me
+            // check if item belongs to me 
             // if so push to catalog array
             for (let i=0; i< allItems.length; i++){
+                console.log(allItems);
                 var item = allItems[i];
-                if(item.user ==="Kenny"){
+               // if(item.user ==="Kenny"){
                     catalog.push(item);
                     /**
                      * if array does not contain category
@@ -22,7 +23,7 @@ function fetchData(){
                   if(categories.indexOf(item.category) ==-1){
                     categories.push(item.category);
                   }
-                }
+               // }
             }
 
             displayCatalog();
@@ -74,6 +75,7 @@ function displayItem(item) {
             <label class="price">$${item.price}</label>
 
             <button class="btn btn-info btn-sm">Add</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteItem('${item._id}')">Delete</button>
         </div>
     </div>`;
 
@@ -100,8 +102,28 @@ function search (text) {
             displayItem(item);
         }
     }
-
 }
+
+function deleteItem(id) {
+    $.ajax({
+        url: '/api/items',
+        type: 'Delete',
+        data: JSON.stringify({id: id}),
+        contentType:'application/json',
+        success: (res) => {
+            console.log("Item Removed!")
+            console.log("Server says ", res);
+
+            //Remove item from HTML to improve the code
+        },
+        error: (errDetails) => {
+            console.log("Could Not Be Deleted")
+            console.log("Error", errDetails);
+        }
+    });
+}
+
+
 
 function init() {
     console.log("Catalog working!");
